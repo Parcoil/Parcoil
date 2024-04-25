@@ -1,0 +1,38 @@
+---
+const { title, ...rest } = Astro.props;
+import Nav from "./Nav.astro";
+import "../dist.css"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} - Parcoil</title>
+	</head>
+	<body {...rest}>
+        <Nav/>
+		<slot/>
+	</body>
+</html>
+    <style>
+  @font-face {
+    font-family: 'Coil-Sans';
+    src: url('/./Croogla4F.ttf') format('truetype');
+}
+
+        @font-face {
+            font-family: 'SF';
+            src: url('/./Coil-Sans.otf') format('opentype');
+        }
+
+        * {
+            font-family: 'SF', sans-serif;
+        }
+
+        .parcoil-logo {
+            font-family: 'Coil-Sans' !important;   
+        }
+    </style>
