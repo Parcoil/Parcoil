@@ -3,6 +3,7 @@ const { title, ...rest } = Astro.props;
 import Nav from "./Nav.astro";
 import Footer from "./Footer.astro";
 import "../dist.css"
+
 ---
 
 <html lang="en">
@@ -11,13 +12,16 @@ import "../dist.css"
 		<link rel="icon" href="/./logo.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+        <script src="./dark.js"></script>
 		<title>{title} - Parcoil</title>
 	</head>
 	<body {...rest}>
         <Nav/>
 		<slot/>
 	</body>
+
     <Footer/>
+    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 </html>
     <style>
   @font-face {

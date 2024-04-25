@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        bluee: "#007bff",
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",
@@ -11,7 +12,7 @@ module.exports = {
           400: "#60a5fa",
           500: "#3b82f6",
           600: "#2563eb",
-          700: "#1d4ed8",
+          700: "#007bff",
           800: "#1e40af",
           900: "#1e3a8a",
           950: "#172554",

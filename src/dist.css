@@ -76,6 +76,9 @@
     height: 10px;
   }
 }
+.bg-primary-600 {
+  background-color: var(--coilui-primary) !important;
+}
 
 .custom-checkbox:checked ~ .checkmark:after {
   animation: checkAnim 0.2s forwards;
