@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("astro:page-load", () => {
   const themeToggle = document.getElementById("theme-toggle");
   const body = document.body;
 

@@ -2,11 +2,12 @@
 const { title, ...rest } = Astro.props;
 import Nav from "./Nav.astro";
 import Footer from "./Footer.astro";
-import "../dist.css"
+import "../dist.css";
+import { ViewTransitions } from 'astro:transitions';
 
 ---
 
-<html lang="en">
+<html lang="en" transition:persist>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/./logo.png" />
@@ -14,8 +15,9 @@ import "../dist.css"
 		<meta name="generator" content={Astro.generator} />
         <script src="./dark.js"></script>
 		<title>{title} - Parcoil</title>
+        <ViewTransitions />
 	</head>
-	<body {...rest}>
+	<body {...rest} transition:persist>
         <Nav/>
 		<slot/>
 	</body>
