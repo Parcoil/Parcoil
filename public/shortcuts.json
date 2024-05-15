@@ -1,0 +1,9 @@
+{
+  "shortcuts": [
+    {
+      "name": "Example Shortcut",
+      "author": "John Doe",
+      "downloadUrl": "https://example.com/shortcut"
+    }
+  ]
+}
