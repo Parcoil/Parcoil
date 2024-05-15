@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc,getDocs } from 'firebase/firestore';
+import {firebaseConfig}  from "@/components/component/fireconf"
+import { toast } from 'react-toastify';
 import { Card,CardContent,
   CardDescription,
   CardFooter,
@@ -9,17 +11,18 @@ import { Card,CardContent,
   CardTitle, } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose
+} from "@/components/ui/dialog"
+import { Input } from '@/components/ui/input';
 
-// Initialize Firebase app
-const firebaseConfig = {
-  apiKey: "AIzaSyABFTePIUCzlSbZWLuYpPyvqIJgn5uQBpU",
-  authDomain: "parcoil.firebaseapp.com",
-  projectId: "parcoil",
-  storageBucket: "parcoil.appspot.com",
-  messagingSenderId: "620906474969",
-  appId: "1:620906474969:web:6e11c631d03e253fd8fdc8",
-  measurementId: "G-FQ8PQ7DD0P"
-};
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -59,20 +62,23 @@ const fetchShortcuts = async () => {
         downloadUrl
       });
       console.log('Shortcut added with ID: ', docRef.id);
+      toast.success('Shortcut Uploaded!');
       setShowModal(false);
       fetchShortcuts(); // Fetch shortcuts again to update the list
     } catch (error) {
+        toast.error('Failed to Upload shortcut Check Console for more', error,);
       console.error('Error adding shortcut:', error);
+      
     }
   };
 
   return (
     <div>
       <h1 className='text-center text-4xl m-4'>Shortcuts</h1>
-      <div className='w-[500px] flex gap-2 justify-center mx-auto flex-row '>
+      <div className='w-[500px] flex gap-2 justify-center mx-auto flex-row flex-wrap'>
         
         {shortcuts.map((shortcut, index) => (
-          <Card key={index} className="w-[700px] ">
+          <Card key={index} className="min-w-[200px] max-w-[200px]">
               <CardHeader>
     <CardTitle>{shortcut.name}</CardTitle>
     <CardDescription>Author: {shortcut.author}</CardDescription>
@@ -92,6 +98,34 @@ const fetchShortcuts = async () => {
         ))}
       </div>
       <Button onClick={() => setShowModal(true)}>Upload Shortcut</Button>
+<Dialog>
+  
+    <DialogTrigger>Open</DialogTrigger>
+    <DialogContent>
+        <form onSubmit={handleUpload}>
+      <DialogHeader>
+        <DialogTitle>Are you absolutely sure?</DialogTitle>
+        <DialogDescription>
+          <Input type="text" name="name" placeholder="Name" />
+          <Input type="text" name="author" placeholder="Author" />
+          <Input type="text" name="downloadUrl" placeholder="Download URL" />
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose >
+        <Button type="submit">Confirm</Button>
+        
+          <Button type="button" variant="secondary">
+            Close
+          </Button>
+        </DialogClose>
+      </DialogFooter>
+      </form>
+    </DialogContent>
+  
+</Dialog>
+
+
 
       {showModal && (
         <div className="modal">
